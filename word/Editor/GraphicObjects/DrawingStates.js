@@ -1201,7 +1201,7 @@ RotateState.prototype =
                                             oAnnot.SetNeedRecalcSizes(true);
                                             oAnnot.Recalculate(true);
 
-                                            let nLineW = oAnnot.GetWidth() * g_dKoef_pt_to_mm;
+                                            let nLineW = oAnnot.GetBorderWidth() * g_dKoef_pt_to_mm;
 
                                             let oGrBounds = oAnnot.bounds;
 
@@ -1247,7 +1247,7 @@ RotateState.prototype =
                                             oAnnot.SetNeedRecalcSizes(true);
                                             oAnnot.Recalculate(true);
 
-                                            let nLineW = oAnnot.GetWidth() * g_dKoef_pt_to_mm;
+                                            let nLineW = oAnnot.GetBorderWidth() * g_dKoef_pt_to_mm;
 
                                             let oGrBounds = oAnnot.bounds;
 
@@ -1264,7 +1264,7 @@ RotateState.prototype =
                                         AscCommon.History.StartNoHistoryMode();
                                         let aCurRect = oAnnot.GetRect().slice();
                                         let aCurRD = oAnnot.GetRectangleDiff().slice();
-                                        let nLineW = oAnnot.GetWidth() * g_dKoef_pt_to_mm;
+                                        let nLineW = oAnnot.GetBorderWidth() * g_dKoef_pt_to_mm;
                                         oAnnot.SetRect(aRect);
                                         oAnnot.SetRectangleDiff([0, 0, 0, 0]);
                                         oAnnot.recalcBounds();
@@ -1296,7 +1296,7 @@ RotateState.prototype =
                                         let aQuads = oAnnot.GetQuads();
                                         let aCurRect = oAnnot.GetRect().slice();
                                         let aCurRD = oAnnot.GetRectangleDiff().slice();
-                                        let nLineW = oAnnot.GetWidth() * g_dKoef_pt_to_mm;
+                                        let nLineW = oAnnot.GetBorderWidth() * g_dKoef_pt_to_mm;
 
                                         if (aQuads.length == 0 || aQuads.length > 1) {
                                             if (aQuads.length > 1) {
@@ -1425,7 +1425,7 @@ RotateState.prototype =
                                         oAnnot.SetVertices(aVertices);
         
                                         // расширяем рект на ширину линии (или на радиус cloud бордера)
-                                        let nLineWidth = oAnnot.GetWidth();
+                                        let nLineWidth = oAnnot.GetBorderWidth();
                                         if (oAnnot.GetBorderEffectStyle() === AscPDF.BORDER_EFFECT_STYLES.cloud) {
                                             aRect[0] -= 12 * oAnnot.GetBorderEffectIntensity();
                                             aRect[1] -= 12 * oAnnot.GetBorderEffectIntensity();
@@ -1451,7 +1451,7 @@ RotateState.prototype =
                                         oAnnot.SetVertices(aVertices);
         
                                         // расширяем рект на ширину линии
-                                        let nLineWidth = oAnnot.GetWidth();
+                                        let nLineWidth = oAnnot.GetBorderWidth();
                                         aRect[0] -= nLineWidth;
                                         aRect[1] -= nLineWidth;
                                         aRect[2] += nLineWidth;
@@ -1539,7 +1539,7 @@ RotateState.prototype =
                                         oAnnot.SetNeedRecalcSizes(true);
                                         oAnnot.Recalculate(true);
 
-                                        let nLineW = oAnnot.GetWidth() * g_dKoef_pt_to_mm;
+                                        let nLineW = oAnnot.GetBorderWidth() * g_dKoef_pt_to_mm;
 
                                         let oGrBounds = oAnnot.bounds;
 
@@ -1633,7 +1633,7 @@ RotateState.prototype =
                                         oAnnot.SetNeedRecalcSizes(true);
                                         oAnnot.Recalculate(true);
 
-                                        let nLineW = oAnnot.GetWidth() * g_dKoef_pt_to_mm;
+                                        let nLineW = oAnnot.GetBorderWidth() * g_dKoef_pt_to_mm;
 
                                         let oGrBounds = oAnnot.bounds;
 

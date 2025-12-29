@@ -3711,8 +3711,6 @@ var CPresentation = CPresentation || function(){};
             return;
 
         oPagesInfo.AddAnnot(oAnnot);
-
-        this.CheckComment(oAnnot);
     };
     CPDFDoc.prototype.AddComment = function(AscCommentData) {
         if (null == AscCommentData.asc_getQuoteText()) {
@@ -9474,7 +9472,7 @@ var CPresentation = CPresentation || function(){};
         if (annotJson["IC"] != null)
             oAnnot.SetFillColor(annotJson["IC"]);
         if (annotJson["dashed"] != null)
-            oAnnot.SetDash(annotJson["dashed"]);
+            oAnnot.SetDashPattern(annotJson["dashed"]);
         if (annotJson["border"] != null)
             oAnnot.SetBorderStyle(annotJson["border"]);
         if (annotJson["Icon"] != null)
@@ -9567,10 +9565,7 @@ var CPresentation = CPresentation || function(){};
         oReply.SetPopupIdx(replyJson["Popup"]);
         oReply.SetSubject(replyJson["Subj"]);
         oReply.SetUserId(replyJson["OUserID"]);
-
-        oReply.SetReplyTo(oParentAnnot);
         oReply.SetApIdx(replyJson["AP"]["i"]);
-
         oReply.SetContents(replyJson["Contents"]);
         
         oParentAnnot.AddReply(oReply);
@@ -9810,7 +9805,7 @@ var CPresentation = CPresentation || function(){};
         oProps.asc_putFill(oFillRGB);
 
         // stroke
-        let oStrokeColor    = annot.GetStrokeColor();
+        let oStrokeColor    = annot.GetBorderColor();
         let oStrokeRGB      = annot.GetRGBColor(oStrokeColor);
 		oStrokeRGB["r"] = oStrokeRGB.r;
         oStrokeRGB["g"] = oStrokeRGB.g;
