@@ -2255,7 +2255,7 @@ CTable.prototype.private_RecalculatePage = function(CurPage)
             var TempY            = Y;
             var TempMaxTopBorder = MaxTopBorder[CurRow];
 
-            if ( null != CellSpacing )
+            if ( null != CellSpacing  || this.bPresentation)
             {
                 HeaderPage.RowsInfo[CurRow].Y            = TempY;
                 HeaderPage.RowsInfo[CurRow].TopDy        = 0;
@@ -2344,7 +2344,7 @@ CTable.prototype.private_RecalculatePage = function(CurPage)
                 }
             }
 
-            if ( null != CellSpacing )
+            if ( null != CellSpacing  || this.bPresentation)
                 HeaderPage.RowsInfo[CurRow].H = CellHeight;
             else
                 HeaderPage.RowsInfo[CurRow].H = CellHeight + TempMaxTopBorder;
@@ -2354,8 +2354,10 @@ CTable.prototype.private_RecalculatePage = function(CurPage)
 
             Row.Height   = CellHeight;
 
-            Y           += MaxBotBorder[CurRow];
-            TableHeight += MaxBotBorder[CurRow];
+						if (!this.bPresentation) {
+							Y           += MaxBotBorder[CurRow];
+							TableHeight += MaxBotBorder[CurRow];
+						}
 
             // Сделаем вертикальное выравнивание ячеек в таблице. Делаем как Word, если ячейка разбилась на несколько
             // страниц, тогда вертикальное выравнивание применяем только к первой странице.
@@ -2833,7 +2835,8 @@ CTable.prototype.private_RecalculatePage = function(CurPage)
                 }
 
                 var CellContentBounds = Cell.Content.Get_PageBounds( CellPageIndex, undefined, true );
-                var CellContentBounds_Bottom = CellContentBounds.Bottom + BottomMargin;
+								//todo Keep in mind that the height of the cell may be greater than the content's ьфкпшт, in which case there is no need to increase the height.
+                var CellContentBounds_Bottom = CellContentBounds.Bottom/* + BottomMargin*/;
 
                 if ( undefined === this.TableRowsBottom[CurRow][CurPage] || this.TableRowsBottom[CurRow][CurPage] < CellContentBounds_Bottom )
                     this.TableRowsBottom[CurRow][CurPage] = CellContentBounds_Bottom;
@@ -3130,7 +3133,7 @@ CTable.prototype.private_RecalculatePage = function(CurPage)
         var TempY            = Y;
         var TempMaxTopBorder = nMaxTopBorder;
 
-        if ( null != CellSpacing )
+        if ( null != CellSpacing || this.bPresentation)
         {
             this.RowsInfo[CurRow].Y[CurPage]            = TempY;
             this.RowsInfo[CurRow].TopDy[CurPage]        = 0;
@@ -3240,7 +3243,7 @@ CTable.prototype.private_RecalculatePage = function(CurPage)
 		}
 		
 
-        if ( null != CellSpacing )
+        if ( null != CellSpacing || this.bPresentation)
             this.RowsInfo[CurRow].H[CurPage] = CellHeight;
         else
             this.RowsInfo[CurRow].H[CurPage] = CellHeight + TempMaxTopBorder;
@@ -3250,8 +3253,11 @@ CTable.prototype.private_RecalculatePage = function(CurPage)
 
         Row.Height   = CellHeight;
 
-        Y           += MaxBotBorder[CurRow];
-        TableHeight += MaxBotBorder[CurRow];
+				if (!this.bPresentation) {
+					Y           += MaxBotBorder[CurRow];
+					TableHeight += MaxBotBorder[CurRow];
+				}
+
 
         if ( this.Content.length - 1 === CurRow )
         {
